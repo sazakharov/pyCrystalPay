@@ -13,9 +13,15 @@ Get paid easily
   
   
   Импорт и вход в кассу:
-______________________________________________________
-from pycrystalpay import CrystalPay \n
+  
+  
+
+from pycrystalpay import CrystalPay 
+
 crystal = CrystalPay('логин_кассы','секретный_ключ_1')
+
+
+
 ______________________________________________________
 
  
