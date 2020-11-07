@@ -44,7 +44,7 @@ class CrystalPay():
 
 
     
-    def generate_pay_link(self, amount):
+    def generate_pay_link(self, amount, redirect = None):
 
         """ Функция генерации ссылки для оплаты.
     
@@ -54,9 +54,15 @@ class CrystalPay():
             list - id платежа, ссылка для оплаты
 
         """
-
-        answer_from_host = loads(get('https://api.crystalpay.ru/api.php?s={}'\
+        
+        if not redirect:
+            
+            answer_from_host = loads(get('https://api.crystalpay.ru/api.php?s={}'\
                                     '&n={}&o=generate&amount={}'.format(self.crystal_secret_1, self.crystal_login, amount)).text)
+        else:
+            
+            answer_from_host = loads(get('https://api.crystalpay.ru/api.php?s={}'\
+                                    '&n={}&o=generate&amount={}&redirect={}'.format(self.crystal_secret_1, self.crystal_login, amount, redirect)).text)
         
         return answer_from_host['id'], answer_from_host['url']
 
@@ -116,4 +122,7 @@ class CrystalPay():
         """
 
         return 'https:\/\/pay.crystalpay.ru\/?i={}'.format(pay_id)
+
+
+
     
